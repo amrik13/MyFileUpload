@@ -27,6 +27,7 @@ public class MainActivity extends AppCompatActivity {
     private Button uploadBtn,submitBtn,viewBtn;
     private String nameStr,priceStr;
     private MyDatabase db;
+    Uri uri;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -102,7 +103,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onActivityResult(int requestCode, int resultCode, Intent imageReturnedIntent) {
         super.onActivityResult(requestCode, resultCode, imageReturnedIntent);
 
-        Uri uri = imageReturnedIntent.getData();
+        uri = imageReturnedIntent.getData();
         img.setImageURI(uri);
 
     }

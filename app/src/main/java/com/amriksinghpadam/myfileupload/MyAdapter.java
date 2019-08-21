@@ -43,8 +43,8 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.VHolder> {
     public void onBindViewHolder(@NonNull VHolder holder, final int position) {
 
        Bitmap imgBitmap = (Bitmap) imgList.get(position);
-        //Glide.with(context).asBitmap().load(imgBitmap).into(holder.image);
-       holder.image.setImageBitmap(imgBitmap);
+        Glide.with(context).asBitmap().load(imgBitmap).into(holder.image);
+       //holder.image.setImageBitmap(imgBitmap);
 
         holder.text1.setText( text1List.get(position));
         holder.text2.setText( "Rs. "+text2List.get(position)+"/-");

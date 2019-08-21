@@ -48,6 +48,7 @@ public class DisplayAll extends AppCompatActivity {
 
         recyclerView.setLayoutManager(new GridLayoutManager(this,2));
         MyAdapter adapter = new MyAdapter(this,imgList,nameList,priceList);
+        adapter.setHasStableIds(true);
         recyclerView.setAdapter(adapter);
 
 
