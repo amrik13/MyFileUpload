@@ -35,27 +35,15 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.VHolder> {
     @Override
     public VHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.single_item,parent,false);
-        VHolder holder = new VHolder(view);
-        return holder;
+        return new VHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull VHolder holder, final int position) {
-
-       Bitmap imgBitmap = (Bitmap) imgList.get(position);
-        Glide.with(context).asBitmap().load(imgBitmap).into(holder.image);
-       //holder.image.setImageBitmap(imgBitmap);
-
-        holder.text1.setText( text1List.get(position));
-        holder.text2.setText( "Rs. "+text2List.get(position)+"/-");
-
-        holder.layout.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Toast.makeText(context,"Product: "+text1List.get(position), Toast.LENGTH_SHORT).show();
-            }
-        });
-
+    public void onBindViewHolder(@NonNull VHolder holder,int position) {
+        Bitmap bitmap = (Bitmap) imgList.get(position);
+        String text1 = text1List.get(position);
+        String text2 = text2List.get(position);
+        holder.bindData(bitmap,text1, text2);
     }
 
     @Override
@@ -63,16 +51,33 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.VHolder> {
         return text1List.size();
     }
 
-    public class VHolder extends RecyclerView.ViewHolder{
+    class VHolder extends RecyclerView.ViewHolder{
         LinearLayout layout;
         TextView text1,text2;
         ImageView image;
-        public VHolder(@NonNull View itemView) {
+        VHolder(@NonNull View itemView) {
             super(itemView);
             layout = itemView.findViewById(R.id.linearLayoutId);
             image = itemView.findViewById(R.id.imgId);
             text1 = itemView.findViewById(R.id.nameId);
             text2 = itemView.findViewById(R.id.priceId);
+        }
+
+        void bindData(Bitmap bitmap, final String text_1, String text_2){
+
+
+            Glide.with(context).asBitmap().load(bitmap).into(image);
+            //holder.image.setImageBitmap(imgBitmap);
+
+            text1.setText(text_1);
+            text2.setText( "Rs. "+text_2+"/-");
+
+            layout.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Toast.makeText(context,"Product: "+text_1, Toast.LENGTH_SHORT).show();
+                }
+            });
         }
     }
 }
