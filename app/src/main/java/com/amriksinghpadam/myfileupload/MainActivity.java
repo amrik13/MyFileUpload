@@ -28,6 +28,7 @@ public class MainActivity extends AppCompatActivity {
     private String nameStr,priceStr;
     private MyDatabase db;
     Uri uri;
+    private String imgeStatus="";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -47,7 +48,7 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View view) {
                 nameStr = name.getText().toString().trim();
                 priceStr = price.getText().toString().trim();
-                if(nameStr.isEmpty() || priceStr.isEmpty()) {
+                if(nameStr.isEmpty() || priceStr.isEmpty() || imgeStatus.isEmpty() ) {
                     Toast.makeText(MainActivity.this,"Please Fill All Section!",Toast.LENGTH_SHORT).show();
                 }else{
                     int priceInt = Integer.parseInt(priceStr);
@@ -102,11 +103,12 @@ public class MainActivity extends AppCompatActivity {
 
     protected void onActivityResult(int requestCode, int resultCode, Intent imageReturnedIntent) {
         super.onActivityResult(requestCode, resultCode, imageReturnedIntent);
-
-        uri = imageReturnedIntent.getData();
-        img.setImageURI(uri);
+        if(resultCode==RESULT_OK){
+            uri = imageReturnedIntent.getData();
+            img.setImageURI(uri);
+            imgeStatus = "ok";
+        }
 
     }
-
 
 }
